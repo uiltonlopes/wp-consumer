@@ -19,11 +19,10 @@ import 'materialize-css/dist/js/materialize'
 (function ($) {
     $(function () {
 
+        
         $('.sidenav').sidenav();
-
+        $('.materialboxed').materialbox();
+        $('select').formSelect();
     }); // end of document ready
 })(jQuery); // end of jQuery name space
 
-$(document).ready(function () {
-    $('.materialboxed').materialbox();
-});
