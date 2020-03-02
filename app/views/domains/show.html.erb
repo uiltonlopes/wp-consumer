@@ -17,3 +17,21 @@
 
 <%= link_to 'Edit', edit_domain_path(@domain) %> |
 <%= link_to 'Back', domains_path %>
+
+<div class="row">
+  <% @gallery.each do |image| %> 
+    <div class="col s12 m4">
+      <div class="card">
+        <div class="card-image">
+          <img class="materialboxed" src="<%= image[:source_url] %>">
+          <span class="card-title"><%= image[:title][:rendered] %></span>
+        </div>
+        <div class="card-content">
+          <p>I am a very simple card. I am good at containing small bits of information.
+          I am convenient because I require little markup to use effectively.</p>
+        </div>
+      </div>
+    </div>
+  <% end %> 
+</div>
+  <%== pagy_materialize_nav(@pagy) %>

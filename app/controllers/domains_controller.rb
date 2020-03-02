@@ -10,6 +10,9 @@ class DomainsController < ApplicationController
   # GET /domains/1
   # GET /domains/1.json
   def show
+    response = Connect.new(@domain).list_images(25, params[:page] || 1)
+    @gallery = JSON.parse(response.read_body, symbolize_names: true)
+    @pagy, @records = pagy_array(@gallery, count: response.header[:'x-wp-total'])
   end
 
   # GET /domains/new
