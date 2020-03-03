@@ -1,37 +1,116 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @domain.name %>
-</p>
-
-<p>
-  <strong>Protocol:</strong>
-  <%= @domain.protocol %>
-</p>
-
-<p>
-  <strong>Host:</strong>
-  <%= @domain.host %>
-</p>
-
-<%= link_to 'Edit', edit_domain_path(@domain) %> |
-<%= link_to 'Back', domains_path %>
-
 <div class="row">
-  <% @gallery.each do |image| %> 
-    <div class="col s12 m4">
-      <div class="card">
-        <div class="card-image">
-          <img class="materialboxed" src="<%= image[:source_url] %>">
-          <span class="card-title"><%= image[:title][:rendered] %></span>
+  <div class="col s12">
+    <div style="padding: 10px;"  class="card">
+      <div class="row">
+        <div class="left card-title">
         </div>
-        <div class="card-content">
-          <p>I am a very simple card. I am good at containing small bits of information.
-          I am convenient because I require little markup to use effectively.</p>
+      </div>
+      <div class="row">
+        <div class="col s12 m6">
+          <div class="col s12">
+            <div class="card horizontal">
+              <div class="card-stacked">
+                <div class="card-content">
+                  <div class="row">
+                    <div class="input-field col s10 m10">
+                      <input type="text">
+                      <label for="last_name">Search for extension</label>
+                    </div>
+                    <div class="input-field col s2 m2">
+                      <a class="waves-effect waves-light btn-floating left"><i class="material-icons left">search</i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  <% end %> 
+  </div>
 </div>
-  <%== pagy_materialize_nav(@pagy) %>
+
+<div class="row">
+  <div class="col s12">
+    <div style="padding: 5px;" align="center" class="card">
+      <div class="row">
+        <div class="left card-title">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s6 m3">
+          <%= link_to domain_image_path(@domain) do %>
+            <div style="padding: 30px;" class="card horizontal grey lighten-3 col s12 waves-effect">
+              <i class="indigo-text text-lighten-1 large material-icons">image</i>
+              <span class="indigo-text text-lighten-1"><h5>Image</h5></span>
+            </div>
+          <% end%>
+        </div>
+
+        <div class="col s6 m3">
+          <%= link_to domain_video_path(@domain) do %>
+            <div style="padding: 30px;" class="card horizontal grey lighten-3 col s12 waves-effect">
+              <i class="indigo-text text-lighten-1 large material-icons">video_library</i>
+              <span class="indigo-text text-lighten-1"><h5>Video</h5></span>
+            </div>
+          <% end%>
+        </div>
+
+        <div class="col s6 m3">
+          <a href="#!" >
+            <div style="padding: 30px;" class="card horizontal grey lighten-3 col s12 waves-effect">
+              <i class="indigo-text text-lighten-1 large material-icons">library_music</i>
+              <span class="indigo-text text-lighten-1"><h5>Sound</h5></span>
+            </div>
+          </a>
+        </div>
+
+        <div class="col s6 m3">
+          <a href="#!" >
+            <div style="padding: 30px;" class="card horizontal grey lighten-3 col s12 waves-effect">
+              <i class="indigo-text text-lighten-1 large material-icons">insert_drive_file</i>
+              <span class="indigo-text text-lighten-1"><h5>TXT</h5></span>
+            </div>
+          </a>
+        </div>
+
+        <div class="col s6 m3">
+          <a href="#!" >
+            <div style="padding: 30px;" class="card horizontal grey lighten-3 col s12 waves-effect">
+              <i class="indigo-text text-lighten-1 large material-icons">insert_drive_file</i>
+              <span class="indigo-text text-lighten-1"><h5>PDF</h5></span>
+            </div>
+          </a>
+        </div>
+
+        <div class="col s6 m3">
+          <a href="#!" >
+            <div style="padding: 30px;" class="card horizontal grey lighten-3 col s12 waves-effect">
+              <i class="indigo-text text-lighten-1 large material-icons">insert_drive_file</i>
+              <span class="indigo-text text-lighten-1"><h5>DOC</h5></span>
+            </div>
+          </a>
+        </div>
+
+        <div class="col s6 m3">
+          <a href="#!" >
+            <div style="padding: 30px;" class="card horizontal grey lighten-3 col s12 waves-effect">
+              <i class="indigo-text text-lighten-1 large material-icons">view_list</i>
+              <span class="indigo-text text-lighten-1"><h5>Endpoints</h5></span>
+            </div>
+          </a>
+        </div>
+
+        <div class="col s6 m3">
+          <a href="#!" >
+            <div style="padding: 30px;" class="card horizontal grey lighten-3 col s12 waves-effect">
+              <i class="indigo-text text-lighten-1 large material-icons">supervisor_account</i>
+              <span class="indigo-text text-lighten-1"><h5>Users</h5></span>
+            </div>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

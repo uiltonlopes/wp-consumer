@@ -42,3 +42,20 @@ body {
   color: #FFF;
   width: auto;
 }
+
+
+  body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+  main {
+    flex: 1 0 auto;
+  }
+
+.card-image{
+    height: 300px; /* Your height here */
+    overflow: hidden;
+}
+

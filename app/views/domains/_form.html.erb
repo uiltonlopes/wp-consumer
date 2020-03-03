@@ -1,32 +1,33 @@
-<%= form_with(model: domain, local: true) do |form| %>
-  <% if domain.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(domain.errors.count, "error") %> prohibited this domain from being saved:</h2>
 
-      <ul>
-        <% domain.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
+      <div class="row">
+        <%= form_with(model: domain, local: true, class:"col s12") do |form| %>
+          <% if domain.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(domain.errors.count, "error") %> prohibited this domain from being saved:</h2>
+
+              <ul>
+                <% domain.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+          <div class="row">
+            <div class="input-field col s3">
+              <%= form.label :name %>
+              <%= form.text_field :name, class:"validate" %>
+            </div>
+            <div class="input-field col s3">
+            <%= form.select :protocol, Domain.protocol.values %>
+            </div>
+            <div class="input-field col s3">
+              <%= form.label :host %>
+              <%= form.text_field :host, class:"validate" %>
+            </div>
+            <div class="input-field col s3">
+              <%= form.submit class:"waves-effect waves-light btn" %>
+              <%= link_to 'Back', domains_path, class:"waves-effect waves-light btn" %>
+            </div>
+          </div>
         <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :protocol %>
-    <%= form.select :protocol, Domain.protocol.values %>
-  </div>
-
-  <div class="field">
-    <%= form.label :host %>
-    <%= form.text_field :host %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+      </div>

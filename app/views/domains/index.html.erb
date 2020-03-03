@@ -1,53 +1,51 @@
-
-
-
-    <div class="row">
-      <div class="col s12">
-        <div style="padding: 35px;" align="center" class="card">
-          <div class="row">
-            <div class="left card-title">
-              <b>User Management</b>
-            </div>
-          </div>
-
-          <div class="row">
-
-            <div class="col s12">
-<p id="notice"><%= notice %></p>
-
-<h1>Domains</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Protocol</th>
-      <th>Host</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @domains.each do |domain| %>
-      <tr>
-        <td><%= domain.name %></td>
-        <td><%= domain.protocol %></td>
-        <td><%= domain.host %></td>
-        <td><%= link_to 'Show', domain %></td>
-        <td><%= link_to 'Edit', edit_domain_path(domain) %></td>
-        <td><%= link_to 'Destroy', domain, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Domain', new_domain_path %>
-            </div>
-
-          </div>
+<div class="row">
+  <div class="col s12">
+    <div style="padding: 35px;" align="center" class="card">
+      <div class="row">
+        <div class="card-title">
+          <b>Domains</b>
         </div>
       </div>
-
+      <div class="row">
+        <p id="notice"><%= notice %></p>
+        <div class="col s12">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Protocol</th>
+                <th>Host</th>
+                <th colspan="3"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @domains.each do |domain| %>
+                <tr>
+                  <td><%= domain.name %></td>
+                  <td><%= domain.protocol %></td>
+                  <td><%= domain.host %></td>
+                  <td><%= link_to 'Show', domain %></td>
+                  <td><%= link_to 'Edit', edit_domain_path(domain) %></td>
+                  <td><%= link_to 'Destroy', domain, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
+  </div>
+</div>
+
+<div class="fixed-action-btn click-to-toggle" style="bottom: 45px; right: 24px;">
+  <a class="btn-floating btn-large pink waves-effect waves-light">
+    <i class="large material-icons">add</i>
+  </a>
+
+  <ul>
+    <li>
+      <a class="btn-floating red"><i class="material-icons">note_add</i></a>
+      <%= link_to 'New Domain', new_domain_path, class:"btn-floating fab-tip" %>
+    </li>
+  </ul>
+</div>

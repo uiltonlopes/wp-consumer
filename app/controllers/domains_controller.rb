@@ -1,5 +1,5 @@
 class DomainsController < ApplicationController
-  before_action :set_domain, only: [:show, :edit, :update, :destroy]
+  before_action :set_domain, only: [:show, :edit, :update, :destroy, :image]
 
   # GET /domains
   # GET /domains.json
@@ -10,15 +10,31 @@ class DomainsController < ApplicationController
   # GET /domains/1
   # GET /domains/1.json
   def show
-    response = Connect.new(@domain).list_images(25, params[:page] || 1)
-    @gallery = JSON.parse(response.read_body, symbolize_names: true)
-    @pagy, @records = pagy_array(@gallery, count: response.header[:'x-wp-total'])
   end
 
   # GET /domains/new
   def new
     @domain = Domain.new
   end
+
+  # GET /domains/new
+  def image
+    response = Connect.new(@domain).list_images(28, params[:page] || 1)
+    @gallery = JSON.parse(response.read_body, symbolize_names: true)
+    @pagy, @records = pagy_array(@gallery, count: response.header[:'x-wp-total'])
+  end
+
+  def video
+    download_file
+  end
+  
+
+  def download_file
+    url = params[:file]
+    data = open(url).read
+    send_data data, disposition: 'attachment', filename: params[:filename]
+  end
+  
 
   # GET /domains/1/edit
   def edit
@@ -67,7 +83,7 @@ class DomainsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_domain
-      @domain = Domain.find(params[:id])
+      @domain = Domain.find(params[:id] || params[:domain_id])
     end
 
     # Only allow a list of trusted parameters through.
