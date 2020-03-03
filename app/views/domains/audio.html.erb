@@ -10,11 +10,13 @@
         <% @gallery.each do |file| %> 
           <div class="col s12 m3">
             <div class="card">
-              <div class="card-image img-resize">
-                <img class="materialboxed responsive-img" src="<%= file[:source_url] %>">
+              <div class="card-image center">
+                <audio controls>
+                    <source src="<%= file[:source_url] %>" >
+                </audio>
               </div>
               <div class="card-content">
-                <p><b>Name:</b> <%= file[:title][:rendered] %></p>
+                <p><b>Name:</b> <%= file%></p>
               </div>
               <div class="card-action center">
                 <%= link_to "Download", domain_download_file_path(@domain, url: file[:source_url]) %>

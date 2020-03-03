@@ -1,5 +1,5 @@
 class DomainsController < ApplicationController
-  before_action :set_domain, only: [:show, :edit, :update, :destroy, :image]
+  before_action :set_domain, only: [:show, :edit, :update, :destroy, :image, :video, :audio]
 
   # GET /domains
   # GET /domains.json
@@ -19,20 +19,46 @@ class DomainsController < ApplicationController
 
   # GET /domains/new
   def image
-    response = Connect.new(@domain).list_images(28, params[:page] || 1)
-    @gallery = JSON.parse(response.read_body, symbolize_names: true)
-    @pagy, @records = pagy_array(@gallery, count: response.header[:'x-wp-total'])
+    response = Connect.new(@domain).mount_url('image', 28, params[:page] || 1)
+    if response.code == '200'
+      @gallery = JSON.parse(response.read_body, symbolize_names: true)
+      @pagy, @records = pagy_array(@gallery, count: response.header[:'x-wp-total'])
+    else
+      redirect_to request.referer, notice: 'No image found.' 
+    end
   end
 
   def video
-    download_file
+    response = Connect.new(@domain).mount_url('video', 28, params[:page] || 1) 
+    if response.code == '200'
+      @gallery = JSON.parse(response.read_body, symbolize_names: true)
+      @pagy, @records = pagy_array(@gallery, count: response.header[:'x-wp-total'])
+    else
+      redirect_to request.referer, notice: 'No video found.' 
+    end
+  end
+
+  def audio
+    response = Connect.new(@domain).mount_url('audio', 28, params[:page] || 1)
+    if response.code == '200'
+      @gallery = JSON.parse(response.read_body, symbolize_names: true)
+      @pagy, @records = pagy_array(@gallery, count: response.header[:'x-wp-total'])
+    else
+      redirect_to request.referer, notice: 'No audio found.' 
+    end
   end
   
 
   def download_file
-    url = params[:file]
-    data = open(url).read
-    send_data data, disposition: 'attachment', filename: params[:filename]
+    url = params[:url]
+    response = HTTParty.get(url)
+    if response.code == '200'
+      tempfile = Down.download(url) 
+      data = open(tempfile.path).read
+      send_data data, disposition: 'attachment', filename: tempfile.original_filename
+    else
+      redirect_to request.referer, notice: 'No download found.' 
+    end
   end
   
 

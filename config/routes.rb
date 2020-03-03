@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :domains do
     get :image
     get :video
+    get :audio
     get :download_file
   end
   root 'welcome#index'

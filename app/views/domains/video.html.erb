@@ -3,22 +3,22 @@
     <div style="padding: 10px;"  class="card">
       <div class="row">
         <div class="left card-title">
-          <p id="notice"><%= notice %></p>
+            <p id="notice"><%= notice %></p>
         </div>
       </div>
       <div class="row">
         <% @gallery.each do |file| %> 
           <div class="col s12 m3">
             <div class="card">
-              <div class="card-image img-resize">
-                <img class="materialboxed responsive-img" src="<%= file[:source_url] %>">
+              <div class="card-image center">
+                <video   width="100%" height="300" controls>
+                    <source src="<%= file[:source_url] %>">
+                </video>
               </div>
-              <div class="card-content">
-                <p><b>Name:</b> <%= file[:title][:rendered] %></p>
+              <div class="card-content" >
+            
               </div>
-              <div class="card-action center">
-                <%= link_to "Download", domain_download_file_path(@domain, url: file[:source_url]) %>
-              </div>
+
             </div>
           </div>
         <% end %> 
