@@ -21,7 +21,7 @@
           <img style="margin-top: 5%;" width="100" height="100" src="https://raw.githubusercontent.com/uiltonlopes/uiltonlopes.github.io/master/images/logo.png" class="circle responsive-img" />
 
           <p style="margin-top: -13%;">
-            Wp Consume
+            WP Consume
           </p>
         </div>
       </div>
@@ -31,7 +31,7 @@
 
     <ul class="collapsible" data-collapsible="accordion">
       <li id="dash_users">
-        <div id="dash_users_header" class="collapsible-header waves-effect"><b>Users</b></div>
+        <div id="dash_users_header" class="collapsible-header waves-effect"><b>Documentation</b></div>
         <div id="dash_users_body" class="collapsible-body">
           <ul>
             <li id="users_seller">
@@ -69,10 +69,8 @@
 
     <nav>
       <div class="nav-wrapper indigo darken-2">
-        <%= link_to  "Home", root_path, style:"margin-left: 20px;", class:"breadcrumb" %>
-        <a class="breadcrumb" href="#!">Index</a>
-
-        <div style="margin-right: 20px;" id="timestamp" class="right"></div>
+      <%= render_breadcrumbs :separator => "" %>
+      <div style="margin-right: 20px;" id="timestamp" class="right"></div>
       </div>
     </nav>
   </header>

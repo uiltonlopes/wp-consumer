@@ -7,6 +7,7 @@ gem 'down'
 gem 'httparty'
 gem 'enumerize'
 gem 'pagy', '~> 3.5'
+gem 'breadcrumbs_on_rails'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.2', '>= 6.0.2.1'
 # Use sqlite3 as the database for Active Record

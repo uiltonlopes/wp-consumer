@@ -63,6 +63,8 @@ GEM
       msgpack (~> 1.0)
     bootsnap (1.4.6-java)
       msgpack (~> 1.0)
+    breadcrumbs_on_rails (4.0.0)
+      rails (>= 5.0)
     builder (3.2.4)
     byebug (11.1.1)
     capybara (3.31.0)
@@ -252,6 +254,7 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap (>= 1.4.2)
+  breadcrumbs_on_rails
   byebug
   capybara (>= 2.15)
   down

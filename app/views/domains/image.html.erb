@@ -17,7 +17,7 @@
                 <p><b>Name:</b> <%= file[:title][:rendered] %></p>
               </div>
               <div class="card-action center">
-                <%= link_to "Download", domain_download_file_path(@domain, url: file[:source_url]) %>
+                <%= link_to "Download", domain_download_file_path(@domain, url: file[:source_url]), class:"waves-effect waves-light btn" %>
               </div>
             </div>
           </div>
