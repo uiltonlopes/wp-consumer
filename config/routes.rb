@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     get :image
     get :video
     get :audio
+    get :search
     get :download_file
   end
   root 'welcome#index'

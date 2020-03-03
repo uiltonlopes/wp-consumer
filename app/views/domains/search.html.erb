@@ -3,7 +3,7 @@
     <div style="padding: 35px;" align="center" class="card">
       <div class="row">
         <div class="card-title">
-          <b>Audio</b>
+          <b>File</b>
         </div>
       </div>
       <div class="row">
@@ -14,8 +14,7 @@
               <tr>
                 <th>ID</th>
                 <th>URL</th>
-                <th>Player</th>
-                <th>Action</th>
+                <th colspan="2">Action</th>
               </tr>
             </thead>
             <tbody>
@@ -23,11 +22,7 @@
                 <tr>
                   <td><%= file[:id] %></td>
                   <td><%= file[:source_url] %></td>
-                  <td>
-                    <audio controls played preload>
-                      <source src="<%= file[:source_url] %>" >
-                    </audio>
-                  </td>
+                  <td><%= link_to "Open", file[:source_url], target: '_blank' %></td>
                   <td><%= link_to "Download", domain_download_file_path(@domain, url: file[:source_url]) %></td>
                 </tr>
               <% end %>

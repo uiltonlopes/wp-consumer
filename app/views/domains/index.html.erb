@@ -9,7 +9,7 @@
       <div class="row">
         <p id="notice"><%= notice %></p>
         <div class="col s12">
-          <table>
+          <table class="highlight responsive-table">
             <thead>
               <tr>
                 <th>Name</th>
@@ -19,7 +19,7 @@
               </tr>
             </thead>
             <tbody>
-              <% @domains.each do |domain| %>
+              <% @records.each do |domain| %>
                 <tr>
                   <td><%= domain.name %></td>
                   <td><%= domain.protocol %></td>
@@ -31,6 +31,9 @@
               <% end %>
             </tbody>
           </table>
+        </div>
+        <div class="col s12 center">
+          <%== pagy_materialize_nav(@pagy) %>
         </div>
       </div>
     </div>

@@ -7,6 +7,11 @@ class Connect
     @url = URI("#{@domain.protocol}://#{@domain.host}/wp-json/wp/v2/media?per_page=#{per_page}&page=#{page}&media_type=#{type}")
     get_files
   end
+
+  def search(q, per_page, page)
+    @url = URI("#{@domain.protocol}://#{@domain.host}/wp-json/wp/v2/media?per_page=#{per_page}&page=#{page}&search=#{q}")
+    get_files
+  end
   
 
   def get_files

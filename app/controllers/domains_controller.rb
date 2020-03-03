@@ -1,10 +1,11 @@
 class DomainsController < ApplicationController
-  before_action :set_domain, only: [:show, :edit, :update, :destroy, :image, :video, :audio]
+  before_action :set_domain, only: [:show, :edit, :update, :destroy, :image, :video, :audio, :search]
 
   # GET /domains
   # GET /domains.json
   def index
     @domains = Domain.all
+    @pagy, @records = pagy_array(@domains, count: @domains.count )
   end
 
   # GET /domains/1
@@ -19,7 +20,7 @@ class DomainsController < ApplicationController
 
   # GET /domains/new
   def image
-    response = Connect.new(@domain).mount_url('image', 28, params[:page] || 1)
+    response = Connect.new(@domain).mount_url('image', 20, params[:page] || 1)
     if response.code == '200'
       @gallery = JSON.parse(response.read_body, symbolize_names: true)
       @pagy, @records = pagy_array(@gallery, count: response.header[:'x-wp-total'])
@@ -29,7 +30,7 @@ class DomainsController < ApplicationController
   end
 
   def video
-    response = Connect.new(@domain).mount_url('video', 28, params[:page] || 1) 
+    response = Connect.new(@domain).mount_url('video', 20, params[:page] || 1) 
     if response.code == '200'
       @gallery = JSON.parse(response.read_body, symbolize_names: true)
       @pagy, @records = pagy_array(@gallery, count: response.header[:'x-wp-total'])
@@ -39,7 +40,7 @@ class DomainsController < ApplicationController
   end
 
   def audio
-    response = Connect.new(@domain).mount_url('audio', 28, params[:page] || 1)
+    response = Connect.new(@domain).mount_url('audio', 20, params[:page] || 1)
     if response.code == '200'
       @gallery = JSON.parse(response.read_body, symbolize_names: true)
       @pagy, @records = pagy_array(@gallery, count: response.header[:'x-wp-total'])
@@ -47,8 +48,17 @@ class DomainsController < ApplicationController
       redirect_to request.referer, notice: 'No audio found.' 
     end
   end
-  
 
+  def search
+    response = Connect.new(@domain).search(params[:q], 20, params[:page] || 1)
+    if response.code == '200'
+      @gallery = JSON.parse(response.read_body, symbolize_names: true)
+      @pagy, @records = pagy_array(@gallery, count: response.header[:'x-wp-total'])
+    else
+      redirect_to request.referer, notice: 'No file found.' 
+    end
+  end
+  
   def download_file
     url = params[:url]
     response = HTTParty.get(url)
