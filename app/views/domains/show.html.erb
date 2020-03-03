@@ -1,12 +1,12 @@
 <div class="row">
   <div class="col s12">
-    <div style="padding: 10px;"  class="card">
+    <div style="padding: 10px;" class="card">
       <div class="row">
         <div class="left card-title">
         </div>
       </div>
       <div class="row">
-        <div class="col s12 m6">
+        <div class="col s12 m6 offset-m3">
           <div class="col s12">
             <div class="card horizontal">
               <div class="card-stacked">
@@ -36,11 +36,38 @@
   <div class="col s12">
     <div style="padding: 5px;" align="center" class="card">
       <div class="row">
-        <div class="left card-title">
+        <div class="center card-title">
           <p id="notice"><%= notice %></p>
         </div>
       </div>
       <div class="row">
+        <div class="col s6 m3">
+          <a href="#!" >
+            <div style="padding: 30px;" class="card horizontal grey lighten-3 col s12 waves-effect">
+              <i class="indigo-text text-lighten-1 large material-icons">view_list</i>
+              <span class="indigo-text text-lighten-1"><h5>Endpoints</h5></span>
+            </div>
+          </a>
+        </div>
+
+        <div class="col s6 m3">
+          <a href="#!" >
+            <div style="padding: 30px;" class="card horizontal grey lighten-3 col s12 waves-effect">
+              <i class="indigo-text text-lighten-1 large material-icons">supervisor_account</i>
+              <span class="indigo-text text-lighten-1"><h5>Users</h5></span>
+            </div>
+          </a>
+        </div>
+
+        <div class="col s6 m3">
+          <%= link_to domain_search_path(@domain, q: '') do %>
+            <div style="padding: 30px;" class="card horizontal grey lighten-3 col s12 waves-effect">
+              <i class="indigo-text text-lighten-1 large material-icons">folder</i>
+              <span class="indigo-text text-lighten-1"><h5>All Files</h5></span>
+            </div>
+          <% end %>
+        </div>
+
         <div class="col s6 m3">
           <%= link_to domain_image_path(@domain) do %>
             <div style="padding: 30px;" class="card horizontal grey lighten-3 col s12 waves-effect">
@@ -96,23 +123,22 @@
         </div>
 
         <div class="col s6 m3">
-          <a href="#!" >
+          <%= link_to domain_search_path(@domain, q: '.xls') do %>
             <div style="padding: 30px;" class="card horizontal grey lighten-3 col s12 waves-effect">
-              <i class="indigo-text text-lighten-1 large material-icons">view_list</i>
-              <span class="indigo-text text-lighten-1"><h5>Endpoints</h5></span>
+              <i class="indigo-text text-lighten-1 large material-icons">insert_drive_file</i>
+              <span class="indigo-text text-lighten-1"><h5>XLS</h5></span>
             </div>
-          </a>
+          <% end %>
         </div>
 
         <div class="col s6 m3">
-          <a href="#!" >
+          <%= link_to domain_search_path(@domain, q: '.ppt') do %>
             <div style="padding: 30px;" class="card horizontal grey lighten-3 col s12 waves-effect">
-              <i class="indigo-text text-lighten-1 large material-icons">supervisor_account</i>
-              <span class="indigo-text text-lighten-1"><h5>Users</h5></span>
+              <i class="indigo-text text-lighten-1 large material-icons">insert_drive_file</i>
+              <span class="indigo-text text-lighten-1"><h5>PPT</h5></span>
             </div>
-          </a>
+          <% end %>
         </div>
-
       </div>
     </div>
   </div>

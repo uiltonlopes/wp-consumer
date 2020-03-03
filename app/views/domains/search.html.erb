@@ -29,7 +29,14 @@
             </tbody>
           </table>
         </div>
-        <div class="col s12 center">
+        <div class="col s6 ">
+          <div class="pagy-materialize-nav pagination left" style="padding: 10px;">
+            <ul class="pagination">
+              Showing <%= @pagy.from %> to <%= @pagy.to %> of <%= @pagy.count %> entries
+            </ul>
+          </div>
+        </div>
+        <div class="col s6"  align="right">
             <%== pagy_materialize_nav(@pagy) %>
         </div>
       </div>

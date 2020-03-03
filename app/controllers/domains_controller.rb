@@ -6,7 +6,7 @@ class DomainsController < ApplicationController
   # GET /domains
   # GET /domains.json
   def index
-    @domains = Domain.all
+    @domains = Domain.all.reverse
     @pagy, @records = pagy_array(@domains, count: @domains.count )
   end
 
