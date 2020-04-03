@@ -4,6 +4,7 @@ class CreateDomains < ActiveRecord::Migration[6.0]
       t.string :name
       t.string :protocol
       t.string :host
+      t.string :namespace
 
       t.timestamps
     end

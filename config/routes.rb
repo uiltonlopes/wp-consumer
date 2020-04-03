@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
+  resources :namespaces
   resources :domains do
     get :image
     get :video
     get :audio
     get :search
+    get :users
     get :download_file
   end
   root 'welcome#index'

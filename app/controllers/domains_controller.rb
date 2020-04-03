@@ -1,7 +1,7 @@
 class DomainsController < ApplicationController
   add_breadcrumb "<a class='breadcrumb' href='/domains'>Domain</a>".html_safe
-  before_action :set_domain, only: [:show, :edit, :update, :destroy, :image, :video, :audio, :search]
-  before_action :set_breadcrumb, only: [:edit, :image, :video, :audio, :search]
+  before_action :set_domain, only: [:show, :edit, :update, :destroy, :image, :video, :audio, :users, :search]
+  before_action :set_breadcrumb, only: [:edit, :image, :video, :audio, :users, :search]
 
   # GET /domains
   # GET /domains.json
@@ -30,7 +30,7 @@ class DomainsController < ApplicationController
       @gallery = JSON.parse(response.read_body, symbolize_names: true)
       @pagy, @records = pagy_array(@gallery, count: response.header[:'x-wp-total'])
     else
-      redirect_to request.referer, notice: 'No image found.' 
+      redirect_to request.referer, notice: 'No image found.'
     end
   end
 
@@ -41,7 +41,7 @@ class DomainsController < ApplicationController
       @gallery = JSON.parse(response.read_body, symbolize_names: true)
       @pagy, @records = pagy_array(@gallery, count: response.header[:'x-wp-total'])
     else
-      redirect_to request.referer, notice: 'No video found.' 
+      redirect_to request.referer, notice: 'No video found.'
     end
   end
 
@@ -52,7 +52,18 @@ class DomainsController < ApplicationController
       @gallery = JSON.parse(response.read_body, symbolize_names: true)
       @pagy, @records = pagy_array(@gallery, count: response.header[:'x-wp-total'])
     else
-      redirect_to request.referer, notice: 'No audio found.' 
+      redirect_to request.referer, notice: 'No audio found.'
+    end
+  end
+
+  def users
+    add_breadcrumb "<a class='breadcrumb' >Users</a>".html_safe
+    response = Connect.new(@domain).users(20, params[:page] || 1)
+    if response.code.to_i == 200
+      @gallery = JSON.parse(response.read_body, symbolize_names: true)
+      @pagy, @records = pagy_array(@gallery, count: response.header[:'x-wp-total'])
+    else
+      redirect_to request.referer, notice: 'No users found.'
     end
   end
 
@@ -63,10 +74,10 @@ class DomainsController < ApplicationController
       @gallery = JSON.parse(response.read_body, symbolize_names: true)
       @pagy, @records = pagy_array(@gallery, count: response.header[:'x-wp-total'])
     else
-      redirect_to request.referer, notice: 'No file found.' 
+      redirect_to request.referer, notice: 'No file found.'
     end
   end
-  
+
   def download_file
     url = params[:url]
     response = HTTParty.get(url)
@@ -75,10 +86,10 @@ class DomainsController < ApplicationController
       data = open(tempfile.path).read
       send_data data, disposition: 'attachment', filename: tempfile.original_filename
     else
-      redirect_to request.referer, notice: 'No download found.' 
+      redirect_to request.referer, notice: 'No download found.'
     end
   end
-  
+
 
   # GET /domains/1/edit
   def edit
@@ -89,10 +100,9 @@ class DomainsController < ApplicationController
   # POST /domains.json
   def create
     @domain = Domain.new(domain_params)
-
     respond_to do |format|
       if @domain.save
-        format.html { redirect_to @domain, notice: 'Domain was successfully created.' }
+        format.html { redirect_to @domain, notice: 'Domain was successfully created.'}
         format.json { render :show, status: :created, location: @domain }
       else
         format.html { render :new }
